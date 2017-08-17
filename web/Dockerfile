@@ -25,5 +25,7 @@ RUN cd /usr/local/src/php-5.2.5 && \
 --with-libdir=lib64 \
 --with-zlib && \
 make && make test && make install
+RUN echo "AddType application/x-httpd-php .php" >> /usr/local/apache2/conf/httpd.conf
+RUN echo "<?php phpinfo(); ?>" > /usr/local/apache2/htdocs/info.php
 
 ENTRYPOINT /usr/local/apache2/bin/httpd -D FOREGROUND
